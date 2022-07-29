@@ -351,7 +351,7 @@ public class JPCaja extends ClassPanel implements Funciones {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Usuario", "Mes Pagado", "Pago", "Fecha"
             }
         ));
         jScrollPane3.setViewportView(jTable2);

@@ -1,10 +1,7 @@
 package main;
 
 import com.org.jblue.Sistema.Sistema;
-import com.org.jblue.Sistema.funciones.FuncionesBD;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Clase encargada del inicio del programa
@@ -18,16 +15,11 @@ public class J_Blue {
      */
     public static void main(String[] args) throws SQLException {
         Sistema sistema = Sistema.getInstancia();
-        //sistema.run();
-        FuncionesBD fun = FuncionesBD.getInstancia();
-        fun.getListaRetardos("13");
+        if (sistema.run()) {
+            System.out.println("¡¡¡JBlue Ok!!!");
+        } else {
+            System.out.println("JBlue Error");
+        }
     }
 
-    public static void xd() {
-        LocalDate fechaMin = LocalDate.MIN;
-
-        LocalDate fechaMax = LocalDate.MAX;
-        System.out.println(fechaMin.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        System.out.println(fechaMax.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-    }
 }

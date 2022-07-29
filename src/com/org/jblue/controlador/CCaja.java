@@ -171,6 +171,10 @@ public class CCaja extends Controlador {
             return null;
         }
 
+        public void llenarPagosHechos() {
+            
+        }
+
         public String query() {
             LocalDate fecha = LocalDate.now();
             return "dia = " + fecha.getDayOfMonth() + " and mes = " + fecha.getMonthValue() + " and anio = " + fecha.getYear();
