@@ -5,8 +5,7 @@
 package com.org.jblue.modelo.operaciones;
 
 import com.org.jblue.Const;
-import com.org.jblue.Sistema.funciones.EncriptadorAES;
-import com.org.jblue.modelo.objetos.OPersonal;
+import com.org.jblue.modelo.objetos.OPagosTitular;
 import com.org.jblue.modelo.objetos.Objeto;
 import com.org.jblue.modelo.operaciones.aux.Funciones;
 import com.org.jblue.modelo.operaciones.aux.Operaciones;
@@ -16,28 +15,15 @@ import java.util.ArrayList;
  *
  * @author jp
  */
-public class OperacionesPersonal extends Funciones implements Operaciones {
+public class OperacionesPagosTitulares extends Funciones implements Operaciones {
 
-    private final int user;
-    private final int pass;
-    private final EncriptadorAES encriptador;
-
-    public OperacionesPersonal() {
-        super("personal", Const.BD_PERSONAL);
-        encriptador = EncriptadorAES.getInstancia();
-        user = campos.length - 2;
-        pass = campos.length - 1;
+    public OperacionesPagosTitulares() {
+        super("pagos_titulares", Const.BD_PAGOS_TITULARES);
     }
 
     @Override
     public boolean insertar(String[] valores) {
-        String usuario = valores[user];
-        String password = valores[pass];
-        System.out.println(usuario);
-        System.out.println(password);
-        valores[user] = encriptador.encriptar(usuario, password);
-        valores[pass] = encriptador.encriptar(password, usuario);
-        return super.INSERTAR(valores);
+        return super.INSERTAR( valores);
     }
 
     @Override
@@ -56,23 +42,23 @@ public class OperacionesPersonal extends Funciones implements Operaciones {
     }
 
     @Override
-    public OPersonal get(String where) {
-        ArrayList<Objeto> get = super.GET(where);
-        if (get==null||get.isEmpty()) {
-            throw new NullPointerException("Error en la clase de operaciones " + tabla);
-        }
-        return (OPersonal) get.get(0);
-    }
-
-    @Override
-    public ArrayList<OPersonal> getLista(String where) {
+    public OPagosTitular get(String where) {
         ArrayList<Objeto> get = super.GET(where);
         if (get.isEmpty()) {
             return null;
         }
-        ArrayList<OPersonal> lista = new ArrayList<>(get.size());
+        return (OPagosTitular) get.get(0);
+    }
+
+    @Override
+    public ArrayList<OPagosTitular> getLista(String where) {
+        ArrayList<Objeto> get = super.GET(where);
+        if (get != null && get.isEmpty()) {
+            return null;
+        }
+        ArrayList<OPagosTitular> lista = new ArrayList<>(get.size());
         for (Objeto objeto : get) {
-            lista.add((OPersonal) objeto);
+            lista.add((OPagosTitular) objeto);
         }
         return lista;
     }

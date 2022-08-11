@@ -24,7 +24,7 @@ public class EncriptadorAES {
 
     private final static EncriptadorAES instancia = new EncriptadorAES();
 
-    public static EncriptadorAES getInstancia() {
+    public synchronized static EncriptadorAES getInstancia() {
         return instancia;
     }
 
@@ -99,6 +99,16 @@ public class EncriptadorAES {
         return null;
     }
 
+    /**
+     * compara si un par de datos desencriptados tienen el mismo resultado que
+     * dos pares de datos encriptados
+     *
+     * @param VE valor encriptado
+     * @param LE llave encriptada
+     * @param VD valor desencriptado
+     * @param LD llave desencriptada
+     * @return true si al encriptar el valor y la llame optienen los mismos resultados que los datos ya encriptados
+     */
     public boolean comparadorEncriptado(String VE, String LE, String VD, String LD) {
         String v = encriptar(VD, LD);
         String k = encriptar(LD, VD);

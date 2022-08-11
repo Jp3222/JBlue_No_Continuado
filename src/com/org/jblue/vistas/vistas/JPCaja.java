@@ -8,7 +8,7 @@ import com.org.jblue.Sistema.Cache;
 import com.org.jblue.Sistema.ProgramaInfo;
 import com.org.jblue.controlador.CCaja;
 import com.org.jblue.modelo.objetos.OTomas;
-import com.org.jblue.modelo.objetos.OUsuarios;
+import com.org.jblue.modelo.objetos.OTitulares;
 import com.org.jblue.vistas.class_aux.ClassPanel;
 import com.org.jblue.vistas.class_aux.Funciones;
 import com.org.jblue.vistas.ventanas.JFMenu;
@@ -28,11 +28,11 @@ public class JPCaja extends ClassPanel implements Funciones {
 
     private final JFMenu menu;
     private final Cache cache;
-    private final ArrayList<OUsuarios> listaSugerencias;
+    private final ArrayList<OTitulares> listaSugerencias;
     private final CCaja controlador;
     private DefaultListModel<String> modeloListaSugerencias;
     private DefaultTableModel model;
-    private OUsuarios usuario;
+    private OTitulares usuario;
     private OTomas toma;
 
     /**
@@ -158,6 +158,8 @@ public class JPCaja extends ClassPanel implements Funciones {
         jlSugerencias.setForeground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(jlSugerencias);
 
+        jtPagosHoy.setBackground(new java.awt.Color(255, 255, 255));
+        jtPagosHoy.setForeground(new java.awt.Color(0, 0, 0));
         jtPagosHoy.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -396,19 +398,21 @@ public class JPCaja extends ClassPanel implements Funciones {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
         menu.irLogin();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
     //</editor-fold>
 
     @Override
     public final void call() {
-        this.Info();
+        this.info();
         this.init();
         this.addListeners();
     }
 
     @Override
-    public void Info() {
+    public void info() {
         menu.setTitle(ProgramaInfo.getSECCIONES(1) + INFO);
 
     }
@@ -419,7 +423,7 @@ public class JPCaja extends ClassPanel implements Funciones {
         modeloListaSugerencias = new DefaultListModel<>();
         jlSugerencias.setModel(modeloListaSugerencias);
         controlador.setModelPagosHoy(model);
-        controlador.getADAPTADOR().llenarTablaPagosHoy();
+        //controlador.getADAPTADOR().llenarTablaPagosHoy();
 
     }
 
@@ -431,7 +435,7 @@ public class JPCaja extends ClassPanel implements Funciones {
             public void keyReleased(KeyEvent e) {
                 super.keyReleased(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
                 modeloListaSugerencias.removeAllElements();
-                for (OUsuarios usuario : listaSugerencias) {
+                for (OTitulares usuario : listaSugerencias) {
                     String nombre = usuario.getId() + " " + usuario.getNombre() + " " + usuario.getAp() + " " + usuario.getAm();
                     if (nombre.contains(jtfNombreBuscar.getText().toUpperCase())) {
                         modeloListaSugerencias.addElement(nombre);
@@ -470,8 +474,8 @@ public class JPCaja extends ClassPanel implements Funciones {
         return getID(jlSugerencias.getSelectedValue());
     }
 
-    public OUsuarios getUsuario(String id) {
-        for (OUsuarios o : cache.getUsuarios()) {
+    public OTitulares getUsuario(String id) {
+        for (OTitulares o : cache.getUsuarios()) {
             if (o.getId().equals(id)) {
                 return o;
             }
@@ -499,7 +503,7 @@ public class JPCaja extends ClassPanel implements Funciones {
         return array[0];
     }
 
-    public OUsuarios getUsuario() {
+    public OTitulares getUsuario() {
         return usuario;
     }
 

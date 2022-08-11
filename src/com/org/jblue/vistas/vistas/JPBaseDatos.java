@@ -19,8 +19,6 @@ import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -59,13 +57,13 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
 
     @Override
     public final void call() {
-        Info();
+        info();
         init();
         addListeners();
     }
 
     @Override
-    public void Info() {
+    public void info() {
         menu.setTitle(titulo);
     }
 
@@ -128,8 +126,8 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
 
         });
         //Panel
-        jTabbedPane1.addChangeListener((e) -> {
-            if (jpUsuarios.isVisible()) {
+        jtpBD.addChangeListener((e) -> {
+            if (jpTitulares.isVisible()) {
                 llenarListaCalles();
                 llenarListaTomas();
                 controlador.llenarTablaUsuarios();
@@ -139,7 +137,7 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
                 controlador.vaciarTablaUsuarios();
             }
             //
-            if (jpTomas.isVisible()) {
+            if (jpTiposTomas.isVisible()) {
                 controlador.llenarTablaTomas();
             } else {
                 controlador.vaciarTablaTomas();
@@ -207,10 +205,12 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jpUsuarios = new javax.swing.JPanel();
+        jtpBD = new javax.swing.JTabbedPane();
+        jpTomasRegistradas = new javax.swing.JPanel();
+        jpTitulares = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtUsuarios = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
@@ -230,7 +230,8 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
         jbtUsuariosEliminar = new javax.swing.JButton();
         jbtUsuariosActualizar = new javax.swing.JButton();
         jbtUsuariosGuardar = new javax.swing.JButton();
-        jpTomas = new javax.swing.JPanel();
+        jpConsumidores = new javax.swing.JPanel();
+        jpTiposTomas = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtTomas = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
@@ -255,6 +256,17 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
         jbtCallesEliminar = new javax.swing.JButton();
         jbtCallesCancelar = new javax.swing.JButton();
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1200, 600));
         setPreferredSize(new java.awt.Dimension(1200, 600));
@@ -278,14 +290,32 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
         });
         jToolBar1.add(jButton1);
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        jTabbedPane1.setAutoscrolls(true);
-        jTabbedPane1.setFocusCycleRoot(true);
+        jtpBD.setBackground(new java.awt.Color(255, 255, 255));
+        jtpBD.setForeground(new java.awt.Color(0, 0, 0));
+        jtpBD.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jtpBD.setAutoscrolls(true);
+        jtpBD.setFocusCycleRoot(true);
 
-        jpUsuarios.setBackground(new java.awt.Color(0, 153, 255));
+        jpTomasRegistradas.setBackground(new java.awt.Color(0, 153, 255));
 
+        javax.swing.GroupLayout jpTomasRegistradasLayout = new javax.swing.GroupLayout(jpTomasRegistradas);
+        jpTomasRegistradas.setLayout(jpTomasRegistradasLayout);
+        jpTomasRegistradasLayout.setHorizontalGroup(
+            jpTomasRegistradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1200, Short.MAX_VALUE)
+        );
+        jpTomasRegistradasLayout.setVerticalGroup(
+            jpTomasRegistradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 521, Short.MAX_VALUE)
+        );
+
+        jtpBD.addTab("TOMAS REGISTRADAS", jpTomasRegistradas);
+
+        jpTitulares.setBackground(new java.awt.Color(0, 153, 255));
+
+        jtUsuarios.setBackground(new java.awt.Color(255, 255, 255));
         jtUsuarios.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jtUsuarios.setForeground(new java.awt.Color(0, 0, 0));
         jtUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -302,6 +332,7 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
                 return canEdit [columnIndex];
             }
         });
+        jtUsuarios.setGridColor(new java.awt.Color(0, 0, 0));
         jtUsuarios.setOpaque(false);
         jtUsuarios.setSelectionBackground(new java.awt.Color(0, 204, 255));
         jtUsuarios.setSelectionForeground(new java.awt.Color(255, 255, 255));
@@ -311,71 +342,93 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
         jtUsuarios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jtUsuarios);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de usuario"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 0, 15), new java.awt.Color(0, 0, 0))); // NOI18N
         jPanel4.setOpaque(false);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Nombre:");
         jLabel1.setPreferredSize(new java.awt.Dimension(52, 30));
 
+        jtfUsuarioNombre.setBackground(new java.awt.Color(255, 255, 255));
+        jtfUsuarioNombre.setForeground(new java.awt.Color(0, 0, 0));
         jtfUsuarioNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jtfUsuarioNombre.setPreferredSize(new java.awt.Dimension(85, 30));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Apellido Paterno");
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Apellido Paterno:");
         jLabel2.setPreferredSize(new java.awt.Dimension(52, 30));
 
+        jtfUsuarioAP.setBackground(new java.awt.Color(255, 255, 255));
+        jtfUsuarioAP.setForeground(new java.awt.Color(0, 0, 0));
         jtfUsuarioAP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jtfUsuarioAP.setPreferredSize(new java.awt.Dimension(85, 30));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Apellido Materno");
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Apellido Materno:");
         jLabel3.setPreferredSize(new java.awt.Dimension(52, 30));
 
+        jcbUsuarioToma.setBackground(new java.awt.Color(255, 255, 255));
+        jcbUsuarioToma.setForeground(new java.awt.Color(0, 0, 0));
         jcbUsuarioToma.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jcbUsuarioToma.setPreferredSize(new java.awt.Dimension(118, 30));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Seleccione el tipo de toma");
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Seleccione el tipo de toma:");
         jLabel4.setPreferredSize(new java.awt.Dimension(300, 30));
 
+        jcbUsuarioCalle.setBackground(new java.awt.Color(255, 255, 255));
+        jcbUsuarioCalle.setForeground(new java.awt.Color(0, 0, 0));
         jcbUsuarioCalle.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jcbUsuarioCalle.setPreferredSize(new java.awt.Dimension(118, 30));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Seleccione una calle");
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Seleccione una calle:");
         jLabel5.setPreferredSize(new java.awt.Dimension(52, 30));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Seleccione una calle");
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Seleccione una calle:");
         jLabel6.setPreferredSize(new java.awt.Dimension(52, 30));
 
+        jcbUsuarioEstado.setBackground(new java.awt.Color(255, 255, 255));
+        jcbUsuarioEstado.setForeground(new java.awt.Color(0, 0, 0));
         jcbUsuarioEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         jcbUsuarioEstado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jcbUsuarioEstado.setPreferredSize(new java.awt.Dimension(118, 30));
 
+        jtfUsuarioAM.setBackground(new java.awt.Color(255, 255, 255));
+        jtfUsuarioAM.setForeground(new java.awt.Color(0, 0, 0));
         jtfUsuarioAM.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jtfUsuarioAM.setPreferredSize(new java.awt.Dimension(85, 30));
 
         jbtUsuariosCancelar.setBackground(new java.awt.Color(204, 204, 204));
+        jbtUsuariosCancelar.setForeground(new java.awt.Color(0, 0, 0));
         jbtUsuariosCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/org/jblue/Icons/crud/cancelar.png"))); // NOI18N
         jbtUsuariosCancelar.setText("Cancelar");
         jbtUsuariosCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jbtUsuariosCancelar.setPreferredSize(new java.awt.Dimension(83, 30));
 
         jbtUsuariosEliminar.setBackground(new java.awt.Color(204, 204, 204));
+        jbtUsuariosEliminar.setForeground(new java.awt.Color(0, 0, 0));
         jbtUsuariosEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/org/jblue/Icons/crud/basura.png"))); // NOI18N
         jbtUsuariosEliminar.setText("Eliminar");
         jbtUsuariosEliminar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jbtUsuariosEliminar.setPreferredSize(new java.awt.Dimension(83, 30));
 
         jbtUsuariosActualizar.setBackground(new java.awt.Color(204, 204, 204));
+        jbtUsuariosActualizar.setForeground(new java.awt.Color(0, 0, 0));
         jbtUsuariosActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/org/jblue/Icons/crud/actualizar-flecha.png"))); // NOI18N
         jbtUsuariosActualizar.setText("Actualizar");
         jbtUsuariosActualizar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jbtUsuariosActualizar.setPreferredSize(new java.awt.Dimension(83, 30));
 
         jbtUsuariosGuardar.setBackground(new java.awt.Color(204, 204, 204));
+        jbtUsuariosGuardar.setForeground(new java.awt.Color(0, 0, 0));
         jbtUsuariosGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/org/jblue/Icons/crud/disquete.png"))); // NOI18N
         jbtUsuariosGuardar.setText("Guardar");
         jbtUsuariosGuardar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -386,14 +439,14 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcbUsuarioToma, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jtfUsuarioNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jtfUsuarioNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jcbUsuarioToma, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -455,20 +508,20 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jpUsuariosLayout = new javax.swing.GroupLayout(jpUsuarios);
-        jpUsuarios.setLayout(jpUsuariosLayout);
-        jpUsuariosLayout.setHorizontalGroup(
-            jpUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpUsuariosLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpTitularesLayout = new javax.swing.GroupLayout(jpTitulares);
+        jpTitulares.setLayout(jpTitularesLayout);
+        jpTitularesLayout.setHorizontalGroup(
+            jpTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTitularesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jpTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
-        jpUsuariosLayout.setVerticalGroup(
-            jpUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpUsuariosLayout.createSequentialGroup()
+        jpTitularesLayout.setVerticalGroup(
+            jpTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTitularesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -476,11 +529,28 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Usuarios", jpUsuarios);
+        jtpBD.addTab("TITULARES", jpTitulares);
 
-        jpTomas.setBackground(new java.awt.Color(0, 153, 255));
+        jpConsumidores.setBackground(new java.awt.Color(0, 153, 255));
 
+        javax.swing.GroupLayout jpConsumidoresLayout = new javax.swing.GroupLayout(jpConsumidores);
+        jpConsumidores.setLayout(jpConsumidoresLayout);
+        jpConsumidoresLayout.setHorizontalGroup(
+            jpConsumidoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1200, Short.MAX_VALUE)
+        );
+        jpConsumidoresLayout.setVerticalGroup(
+            jpConsumidoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 521, Short.MAX_VALUE)
+        );
+
+        jtpBD.addTab("CONSUMIDORES", jpConsumidores);
+
+        jpTiposTomas.setBackground(new java.awt.Color(0, 153, 255));
+
+        jtTomas.setBackground(new java.awt.Color(255, 255, 255));
         jtTomas.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jtTomas.setForeground(new java.awt.Color(0, 0, 0));
         jtTomas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -505,26 +575,35 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
             }
         });
         jtTomas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jtTomas.setGridColor(new java.awt.Color(0, 0, 0));
         jtTomas.setSelectionBackground(new java.awt.Color(0, 204, 255));
         jtTomas.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jtTomas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtTomas.setShowGrid(true);
         jtTomas.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jtTomas);
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Datos de la toma"));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Datos de la toma", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 0, 15), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel6.setForeground(new java.awt.Color(0, 0, 0));
         jPanel6.setOpaque(false);
 
+        jtfTomasNombre.setBackground(new java.awt.Color(255, 255, 255));
+        jtfTomasNombre.setForeground(new java.awt.Color(0, 0, 0));
         jtfTomasNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jtfTomasNombre.setPreferredSize(new java.awt.Dimension(85, 30));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Tipo de toma");
         jLabel8.setPreferredSize(new java.awt.Dimension(52, 30));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Precio de la toma");
         jLabel9.setPreferredSize(new java.awt.Dimension(52, 30));
 
+        jtfTomasPrecio.setBackground(new java.awt.Color(255, 255, 255));
+        jtfTomasPrecio.setForeground(new java.awt.Color(0, 0, 0));
         jtfTomasPrecio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jtfTomasPrecio.setPreferredSize(new java.awt.Dimension(85, 30));
 
@@ -556,39 +635,43 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
         );
 
         jbtTomasGuardar.setBackground(new java.awt.Color(204, 204, 204));
+        jbtTomasGuardar.setForeground(new java.awt.Color(0, 0, 0));
         jbtTomasGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/org/jblue/Icons/crud/disquete.png"))); // NOI18N
         jbtTomasGuardar.setText("Guardar");
         jbtTomasGuardar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jbtTomasGuardar.setPreferredSize(new java.awt.Dimension(83, 30));
 
         jbtTomasActualizar.setBackground(new java.awt.Color(204, 204, 204));
+        jbtTomasActualizar.setForeground(new java.awt.Color(0, 0, 0));
         jbtTomasActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/org/jblue/Icons/crud/actualizar-flecha.png"))); // NOI18N
         jbtTomasActualizar.setText("Actualizar");
         jbtTomasActualizar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jbtTomasActualizar.setPreferredSize(new java.awt.Dimension(83, 30));
 
         jbtTomasEliminar.setBackground(new java.awt.Color(204, 204, 204));
+        jbtTomasEliminar.setForeground(new java.awt.Color(0, 0, 0));
         jbtTomasEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/org/jblue/Icons/crud/basura.png"))); // NOI18N
         jbtTomasEliminar.setText("Eliminar");
         jbtTomasEliminar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jbtTomasEliminar.setPreferredSize(new java.awt.Dimension(83, 30));
 
         jbtTomasCancelar.setBackground(new java.awt.Color(204, 204, 204));
+        jbtTomasCancelar.setForeground(new java.awt.Color(0, 0, 0));
         jbtTomasCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/org/jblue/Icons/crud/cancelar.png"))); // NOI18N
         jbtTomasCancelar.setText("Cancelar");
         jbtTomasCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jbtTomasCancelar.setPreferredSize(new java.awt.Dimension(83, 30));
 
-        javax.swing.GroupLayout jpTomasLayout = new javax.swing.GroupLayout(jpTomas);
-        jpTomas.setLayout(jpTomasLayout);
-        jpTomasLayout.setHorizontalGroup(
-            jpTomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpTomasLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpTiposTomasLayout = new javax.swing.GroupLayout(jpTiposTomas);
+        jpTiposTomas.setLayout(jpTiposTomasLayout);
+        jpTiposTomasLayout.setHorizontalGroup(
+            jpTiposTomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTiposTomasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpTomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpTomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jpTiposTomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpTiposTomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbtTomasGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbtTomasActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -596,13 +679,13 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
                     .addComponent(jbtTomasCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(154, Short.MAX_VALUE))
         );
-        jpTomasLayout.setVerticalGroup(
-            jpTomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpTomasLayout.createSequentialGroup()
+        jpTiposTomasLayout.setVerticalGroup(
+            jpTiposTomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpTiposTomasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpTomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpTiposTomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
-                    .addGroup(jpTomasLayout.createSequentialGroup()
+                    .addGroup(jpTiposTomasLayout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtTomasGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -616,11 +699,13 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Tomas", jpTomas);
+        jtpBD.addTab("TIPOS DE TOMAS", jpTiposTomas);
 
         jpCalles.setBackground(new java.awt.Color(0, 153, 255));
 
+        jtCalles.setBackground(new java.awt.Color(255, 255, 255));
         jtCalles.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jtCalles.setForeground(new java.awt.Color(0, 0, 0));
         jtCalles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -637,23 +722,29 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
                 return canEdit [columnIndex];
             }
         });
+        jtCalles.setGridColor(new java.awt.Color(0, 0, 0));
         jtCalles.setSelectionBackground(new java.awt.Color(0, 204, 255));
         jtCalles.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jtCalles.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtCalles.setShowGrid(true);
         jtCalles.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jtCalles);
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Datos de la calle"));
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Datos de la calle", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 0, 15), new java.awt.Color(0, 0, 0))); // NOI18N
         jPanel8.setOpaque(false);
 
+        jtfCalleNombre.setBackground(new java.awt.Color(255, 255, 255));
+        jtfCalleNombre.setForeground(new java.awt.Color(0, 0, 0));
         jtfCalleNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jtfCalleNombre.setPreferredSize(new java.awt.Dimension(85, 30));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Nombre de la calle");
         jLabel10.setPreferredSize(new java.awt.Dimension(52, 30));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Numero");
         jLabel11.setPreferredSize(new java.awt.Dimension(52, 30));
 
@@ -690,24 +781,28 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
         );
 
         jbtCallesGuardar.setBackground(new java.awt.Color(204, 204, 204));
+        jbtCallesGuardar.setForeground(new java.awt.Color(0, 0, 0));
         jbtCallesGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/org/jblue/Icons/crud/disquete.png"))); // NOI18N
         jbtCallesGuardar.setText("Guardar");
         jbtCallesGuardar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jbtCallesGuardar.setPreferredSize(new java.awt.Dimension(83, 30));
 
         jbtCallesActualizar.setBackground(new java.awt.Color(204, 204, 204));
+        jbtCallesActualizar.setForeground(new java.awt.Color(0, 0, 0));
         jbtCallesActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/org/jblue/Icons/crud/actualizar-flecha.png"))); // NOI18N
         jbtCallesActualizar.setText("Actualizar");
         jbtCallesActualizar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jbtCallesActualizar.setPreferredSize(new java.awt.Dimension(83, 30));
 
         jbtCallesEliminar.setBackground(new java.awt.Color(204, 204, 204));
+        jbtCallesEliminar.setForeground(new java.awt.Color(0, 0, 0));
         jbtCallesEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/org/jblue/Icons/crud/basura.png"))); // NOI18N
         jbtCallesEliminar.setText("Eliminar");
         jbtCallesEliminar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jbtCallesEliminar.setPreferredSize(new java.awt.Dimension(83, 30));
 
         jbtCallesCancelar.setBackground(new java.awt.Color(204, 204, 204));
+        jbtCallesCancelar.setForeground(new java.awt.Color(0, 0, 0));
         jbtCallesCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/org/jblue/Icons/crud/cancelar.png"))); // NOI18N
         jbtCallesCancelar.setText("Cancelar");
         jbtCallesCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -750,13 +845,13 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Calles", jpCalles);
+        jtpBD.addTab("CALLES", jpCalles);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jtpBD, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -764,8 +859,10 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1))
+                .addComponent(jtpBD))
         );
+
+        jtpBD.getAccessibleContext().setAccessibleName("JTPBD");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -795,7 +892,7 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
         jcbUsuarioToma.setSelectedIndex(0);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="Metodos de Tomas"> 
+    // <editor-fold defaultstate="collapsed" desc="Metodos de Tipos de Tomas"> 
     public String[] getTomasInsert() {
         String[] o = new String[3];
         o[0] = "0";
@@ -831,7 +928,7 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
 
     //</editor-fold>
 //
-    // <editor-fold defaultstate="collapsed" desc="Metodos de calles"> 
+    // <editor-fold defaultstate="collapsed" desc="Metodos de Calles Registradas"> 
     public String[] getCalleInsert() {
         String[] o = new String[Const.BD_CALLES.length];
         o[0] = "0";
@@ -862,7 +959,7 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
 
     //</editor-fold>
 //
-    // <editor-fold defaultstate="collapsed" desc="Metodos de Usuario"> 
+    // <editor-fold defaultstate="collapsed" desc="Metodos de Titulares"> 
     public String[] getUsuariosInsert() {
         String[] o = new String[8];
         o[0] = "0";
@@ -937,7 +1034,7 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
 
     //</editor-fold>
 //
-    // <editor-fold defaultstate="collapsed" desc="Metodos de llenado de listas"> 
+    // <editor-fold defaultstate="collapsed" desc="Metodos de llenade llenado de listas"> 
     public void llenarListaTomas() {
         ArrayList<OTomas> tomas = memoriaCache.getTomas();
         jcbUsuarioToma.addItem("- - Tomas - -");
@@ -990,13 +1087,13 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton jbtCallesActualizar;
     private javax.swing.JButton jbtCallesCancelar;
@@ -1014,8 +1111,10 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
     private javax.swing.JComboBox<String> jcbUsuarioEstado;
     private javax.swing.JComboBox<String> jcbUsuarioToma;
     private javax.swing.JPanel jpCalles;
-    private javax.swing.JPanel jpTomas;
-    private javax.swing.JPanel jpUsuarios;
+    private javax.swing.JPanel jpConsumidores;
+    private javax.swing.JPanel jpTiposTomas;
+    private javax.swing.JPanel jpTitulares;
+    private javax.swing.JPanel jpTomasRegistradas;
     private javax.swing.JSpinner jspCalleNumero;
     private javax.swing.JTable jtCalles;
     private javax.swing.JTable jtTomas;
@@ -1026,6 +1125,7 @@ public class JPBaseDatos extends ClassPanel implements Funciones {
     private javax.swing.JTextField jtfUsuarioAM;
     private javax.swing.JTextField jtfUsuarioAP;
     private javax.swing.JTextField jtfUsuarioNombre;
+    private javax.swing.JTabbedPane jtpBD;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>
 

@@ -4,14 +4,13 @@
  */
 package com.org.jblue.vistas.vistas.auxiliar;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author jp
  */
 public interface Observador {
-
+    
+    
     public void actualizar();
 
 }

@@ -41,13 +41,13 @@ public class JFMenu extends ClassVentana implements Funciones {
 
     @Override
     public final void call() {
-        Info();
+        info();
         init();
         addListeners();
     }
 
     @Override
-    public void Info() {
+    public void info() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setMaximumSize(toolkit.getScreenSize());
     }
@@ -108,6 +108,7 @@ public class JFMenu extends ClassVentana implements Funciones {
 
     public void irLogin() {
         this.dispose();
+        ventanas.finSesion();
         sleep();
         login.setVisible(true);
     }

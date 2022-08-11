@@ -6,11 +6,11 @@ package com.org.jblue.controlador;
 
 import com.org.jblue.Sistema.Cache;
 import com.org.jblue.modelo.objetos.OCalles;
+import com.org.jblue.modelo.objetos.OTitulares;
 import com.org.jblue.modelo.objetos.OTomas;
-import com.org.jblue.modelo.objetos.OUsuarios;
 import com.org.jblue.modelo.operaciones.OperacionesCalles;
+import com.org.jblue.modelo.operaciones.OperacionesTitulares;
 import com.org.jblue.modelo.operaciones.OperacionesTomas;
-import com.org.jblue.modelo.operaciones.OperacionesUsuarios;
 import com.org.jblue.vistas.vistas.JPBaseDatos;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -25,7 +25,7 @@ public class CBaseDatos extends Controlador {
     private final JPBaseDatos administracion;
     private final OperacionesTomas otomas;
     private final OperacionesCalles ocalles;
-    private final OperacionesUsuarios ousuarios;
+    private final OperacionesTitulares ousuarios;
     private DefaultTableModel modelUsuarios, modelCalles, modelTomas;
     private final Cache memoriaCache;
 
@@ -33,7 +33,7 @@ public class CBaseDatos extends Controlador {
         this.administracion = administracion;
         this.otomas = new OperacionesTomas();
         this.ocalles = new OperacionesCalles();
-        this.ousuarios = new OperacionesUsuarios();
+        this.ousuarios = new OperacionesTitulares();
         this.memoriaCache = Cache.getInstancia();
 
     }
@@ -271,8 +271,8 @@ public class CBaseDatos extends Controlador {
     }
 
     public void llenarTablaUsuarios() {
-        ArrayList<OUsuarios> usuarios = memoriaCache.getUsuarios();
-        for (OUsuarios o : usuarios) {
+        ArrayList<OTitulares> usuarios = memoriaCache.getUsuarios();
+        for (OTitulares o : usuarios) {
             modelUsuarios.addRow(o.getInfo());
         }
         ArrayList<OTomas> tomas = memoriaCache.getTomas();

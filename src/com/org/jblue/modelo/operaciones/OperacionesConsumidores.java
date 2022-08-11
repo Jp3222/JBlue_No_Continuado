@@ -5,7 +5,7 @@
 package com.org.jblue.modelo.operaciones;
 
 import com.org.jblue.Const;
-import com.org.jblue.modelo.objetos.OCalles;
+import com.org.jblue.modelo.objetos.OConsumidores;
 import com.org.jblue.modelo.objetos.Objeto;
 import com.org.jblue.modelo.operaciones.aux.Funciones;
 import com.org.jblue.modelo.operaciones.aux.Operaciones;
@@ -15,10 +15,10 @@ import java.util.ArrayList;
  *
  * @author jp
  */
-public class OperacionesCalles extends Funciones implements Operaciones {
+public class OperacionesConsumidores extends Funciones implements Operaciones {
 
-    public OperacionesCalles() {
-        super("calle", Const.BD_CALLES);
+    public OperacionesConsumidores() {
+        super("consumidores", Const.BD_CONSUMIDORES);
     }
 
     @Override
@@ -39,26 +39,27 @@ public class OperacionesCalles extends Funciones implements Operaciones {
     @Override
     public boolean actualizar(String[] campos, String[] valores, String where) {
         return super.ACTUALIZAR(campos, valores, where);
+
     }
 
     @Override
-    public OCalles get(String where) {
-        ArrayList<Objeto> get = super.GET( where);
+    public OConsumidores get(String where) {
+        ArrayList<Objeto> get = GET( where);
         if (get.isEmpty()) {
             return null;
         }
-        return (OCalles) get.get(0);
+        return (OConsumidores) get.get(0);
     }
 
     @Override
-    public ArrayList<OCalles> getLista(String where) {
-        ArrayList<Objeto> get = super.GET( where);
+    public ArrayList<OConsumidores> getLista(String where) {
+         ArrayList<Objeto> get = super.GET( where);
         if (get.isEmpty()) {
             return null;
         }
-        ArrayList<OCalles> lista = new ArrayList<>(get.size());
+        ArrayList<OConsumidores> lista = new ArrayList<>(get.size());
         for (Objeto objeto : get) {
-            lista.add((OCalles) objeto);
+            lista.add((OConsumidores) objeto);
         }
         return lista;
     }

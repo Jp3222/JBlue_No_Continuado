@@ -13,5 +13,5 @@ import javax.swing.JPanel;
  */
 public class ClassPanel extends JPanel {
 
-    protected final String INFO = " - " + ProgramaInfo.NOMBRE + " " + ProgramaInfo.VERSION;
+    protected final String INFO = ProgramaInfo.NOMBRE + " - " + ProgramaInfo.VERSION;
 }

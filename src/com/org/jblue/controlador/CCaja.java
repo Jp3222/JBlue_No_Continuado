@@ -7,10 +7,10 @@ package com.org.jblue.controlador;
 import com.jsql.conexion.Conexion;
 import com.org.jblue.Const;
 import com.org.jblue.Sistema.Cache;
-import com.org.jblue.modelo.objetos.OPagos;
+import com.org.jblue.modelo.objetos.OPagosTitular;
+import com.org.jblue.modelo.objetos.OTitulares;
 import com.org.jblue.modelo.objetos.OTomas;
-import com.org.jblue.modelo.objetos.OUsuarios;
-import com.org.jblue.modelo.operaciones.OperacionesPagos;
+import com.org.jblue.modelo.operaciones.OperacionesPagosTitulares;
 import com.org.jblue.vistas.vistas.JPCaja;
 import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
@@ -31,16 +31,16 @@ public class CCaja extends Controlador {
     private final JPCaja CAJA;
     private final CCaja_Adaptador ADAPTADOR;
     private final Cache memoriaCache;
-    private OUsuarios usuario_en_caja;
+    private OTitulares usuario_en_caja;
     private OTomas tipo_de_toma;
-    private DefaultTableModel modelPagosHoy;
-    private final OperacionesPagos operacionesPagos;
+    private DefaultTableModel modelPagosHoy, modelTodosPagos;
+    private final OperacionesPagosTitulares operacionesPagos;
 
     public CCaja(JPCaja CAJA) {
         this.CAJA = CAJA;
         this.ADAPTADOR = new CCaja_Adaptador();
         this.memoriaCache = Cache.getInstancia();
-        this.operacionesPagos = new OperacionesPagos();
+        this.operacionesPagos = new OperacionesPagosTitulares();
     }
 
     public CCaja_Adaptador getADAPTADOR() {
@@ -51,7 +51,7 @@ public class CCaja extends Controlador {
         this.tipo_de_toma = tipo_de_toma;
     }
 
-    public void setUsuario_en_caja(OUsuarios usuario_en_caja) {
+    public void setUsuario_en_caja(OTitulares usuario_en_caja) {
         this.usuario_en_caja = usuario_en_caja;
     }
 
@@ -77,7 +77,7 @@ public class CCaja extends Controlador {
         }
 
         public void cobrar() {
-            OUsuarios usuario = CAJA.getUsuario();
+            OTitulares usuario = CAJA.getUsuario();
             LocalDate fecha = LocalDate.now();
             int meses_pagados = getMesesPagados(usuario.getId());
             int meses_a_pagar = CAJA.Meses_A_Pagar();
@@ -95,7 +95,7 @@ public class CCaja extends Controlador {
 
         public void pagos(int inicio_1, int fin_2) {
             int inicio = inicio_1, fin = inicio + fin_2;
-            OUsuarios usuario = CAJA.getUsuario();
+            OTitulares usuario = CAJA.getUsuario();
             System.out.println(usuario.getEstado());
             OTomas toma = CAJA.getToma();
             Conexion cn = Conexion.getInstancia();
@@ -134,10 +134,13 @@ public class CCaja extends Controlador {
         public void llenarTablaPagosHoy() {
             vaciarTablaPagosHoy();
             String query = query();
-            ArrayList<OPagos> lista = operacionesPagos.getLista(query);
-            for (OPagos oPagos : lista) {
-                String[] info = getInfo(oPagos.getUsuario());
-                String[] array = {info[0], info[1], oPagos.getMesPagado()};
+            ArrayList<OPagosTitular> lista = operacionesPagos.getLista(query);
+            if (lista.isEmpty()) {
+                return;
+            }
+            for (OPagosTitular oPagos : lista) {
+                String[] info = getInfo(oPagos.getTitular());
+                String[] array = {info[0], info[1], oPagos.getMes_pagado()};
                 modelPagosHoy.addRow(array);
             }
         }
@@ -149,8 +152,8 @@ public class CCaja extends Controlador {
         }
 
         String[] getInfo(String id) {
-            ArrayList<OUsuarios> usuarios = memoriaCache.getUsuarios();
-            for (OUsuarios usuario : usuarios) {
+            ArrayList<OTitulares> usuarios = memoriaCache.getUsuarios();
+            for (OTitulares usuario : usuarios) {
                 if (usuario.getId().equals(id)) {
                     String nombre = usuario.getNombre() + " " + usuario.getAp() + " " + usuario.getAm();
                     return new String[]{
@@ -172,7 +175,7 @@ public class CCaja extends Controlador {
         }
 
         public void llenarPagosHechos() {
-            
+
         }
 
         public String query() {

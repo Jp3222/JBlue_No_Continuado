@@ -19,35 +19,39 @@ public class Sistema {
 
     private final static Sistema instancia = new Sistema();
 
-    public static Sistema getInstancia() {
+    public synchronized static Sistema getInstancia() {
         return instancia;
     }
 
     private final ConstructorDeArchivos contructor;
     private Conexion cn;
     private Cache memoriaCache;
+    private boolean init;
 
     public Sistema() {
+        this.init = false;
         this.contructor = ConstructorDeArchivos.getInstancia();
         init();
     }
 
     private void init() {
-        if (contructor.getFiles(1).exists()) {
-            AText o = new AText();
-            String Leer_Archivo = o.Leer_Archivo(contructor.getFiles(1));
-            String[] usuarioBD = Leer_Archivo.split(",");
-            cn = Conexion.getInstancia(usuarioBD[0], usuarioBD[1], usuarioBD[2]);
-            this.memoriaCache = Cache.getInstancia();
-            memoriaCache.init();
-            if (!cn.isConexion()) {
-                JOptionPane.showMessageDialog(null, "Conexion Fallida", "Estado de Conexion", JOptionPane.ERROR_MESSAGE);
-                System.out.println("conexion fallida");
-            }
-        } else {
+        if (!contructor.getFiles(1).exists()) {
             construir();
+            return;
         }
-
+        AText o = new AText();
+        String Leer_Archivo = o.Leer_Archivo(contructor.getFiles(1));
+        String[] usuarioBD = Leer_Archivo.split(",");
+        this.cn = Conexion.getInstancia(usuarioBD[0], usuarioBD[1], usuarioBD[2]);
+        this.memoriaCache = Cache.getInstancia();
+        this.memoriaCache.init();
+        if (!cn.isConexion()) {
+            JOptionPane.showMessageDialog(null, "Conexion Fallida", "Estado de Conexion", JOptionPane.ERROR_MESSAGE);
+            System.out.println("conexion fallida");
+        } else {
+            System.out.println("conexion exitosa");
+        }
+        init = true;
     }
 
     public void construir() {
@@ -57,15 +61,18 @@ public class Sistema {
 
     public boolean run() {
         try {
-            JFLogin login = new JFLogin();
-            Runnable runnable = () -> login.setVisible(true);
-            SwingUtilities.invokeLater(runnable);
+            if (init) {
+                JFLogin login = new JFLogin();
+                Runnable runnable = () -> login.setVisible(true);
+                SwingUtilities.invokeLater(runnable);
+                return true;
+            }
         } catch (Exception e) {
             System.out.println(e.getCause().getMessage());
             return false;
         } finally {
 
         }
-        return true;
+        return false;
     }
 }

@@ -5,8 +5,7 @@
 package com.org.jblue.modelo.operaciones;
 
 import com.org.jblue.Const;
-import com.org.jblue.Sistema.funciones.EncriptadorAES;
-import com.org.jblue.modelo.objetos.OPersonal;
+import com.org.jblue.modelo.objetos.OPagosConsumidor;
 import com.org.jblue.modelo.objetos.Objeto;
 import com.org.jblue.modelo.operaciones.aux.Funciones;
 import com.org.jblue.modelo.operaciones.aux.Operaciones;
@@ -16,27 +15,14 @@ import java.util.ArrayList;
  *
  * @author jp
  */
-public class OperacionesPersonal extends Funciones implements Operaciones {
+public class OperacionesPagosConsumidores extends Funciones implements Operaciones {
 
-    private final int user;
-    private final int pass;
-    private final EncriptadorAES encriptador;
-
-    public OperacionesPersonal() {
-        super("personal", Const.BD_PERSONAL);
-        encriptador = EncriptadorAES.getInstancia();
-        user = campos.length - 2;
-        pass = campos.length - 1;
+    public OperacionesPagosConsumidores() {
+        super("pagos_consumidores", Const.BD_PAGOS_CONSUMIDORES);
     }
 
     @Override
     public boolean insertar(String[] valores) {
-        String usuario = valores[user];
-        String password = valores[pass];
-        System.out.println(usuario);
-        System.out.println(password);
-        valores[user] = encriptador.encriptar(usuario, password);
-        valores[pass] = encriptador.encriptar(password, usuario);
         return super.INSERTAR(valores);
     }
 
@@ -53,28 +39,28 @@ public class OperacionesPersonal extends Funciones implements Operaciones {
     @Override
     public boolean actualizar(String[] campos, String[] valores, String where) {
         return super.ACTUALIZAR(campos, valores, where);
+
     }
 
     @Override
-    public OPersonal get(String where) {
-        ArrayList<Objeto> get = super.GET(where);
-        if (get==null||get.isEmpty()) {
-            throw new NullPointerException("Error en la clase de operaciones " + tabla);
+    public OPagosConsumidor get(String where) {
+        ArrayList<Objeto> get = GET(where);
+        if (get.isEmpty()) {
+            return null;
         }
-        return (OPersonal) get.get(0);
+        return (OPagosConsumidor) get.get(0);
     }
 
     @Override
-    public ArrayList<OPersonal> getLista(String where) {
+    public ArrayList<OPagosConsumidor> getLista(String where) {
         ArrayList<Objeto> get = super.GET(where);
         if (get.isEmpty()) {
             return null;
         }
-        ArrayList<OPersonal> lista = new ArrayList<>(get.size());
+        ArrayList<OPagosConsumidor> lista = new ArrayList<>(get.size());
         for (Objeto objeto : get) {
-            lista.add((OPersonal) objeto);
+            lista.add((OPagosConsumidor) objeto);
         }
         return lista;
     }
-
 }

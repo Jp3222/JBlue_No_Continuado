@@ -34,7 +34,19 @@ public class OCalles extends Objeto {
     public void setNumero(String numero) {
         this.numero = numero;
     }
-    
+
+    @Override
+    public void setInfo(String[] info) {
+        super.setInfo(info);
+        this.nombre = info[1];
+        this.numero = info[2];
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
     
 
 }

@@ -13,6 +13,6 @@ import javax.swing.JFrame;
  */
 public abstract class ClassVentana extends JFrame {
 
-    protected final String INFO = " - " + ProgramaInfo.NOMBRE + " " + ProgramaInfo.VERSION;
+    protected final String INFO = ProgramaInfo.NOMBRE + " - " + ProgramaInfo.VERSION;
 
 }

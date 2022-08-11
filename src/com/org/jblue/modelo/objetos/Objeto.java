@@ -7,20 +7,16 @@ import java.util.Objects;
  *
  * @author jp
  */
-public abstract class Objeto implements Comparable<Objeto> {
+public abstract class Objeto implements Comparable<Objeto>, Cloneable {
 
-    protected String id;
-    protected String[] info;
-    protected boolean existe;
+    private String id;
+    private String[] info;
+    private boolean existe;
 
     public Objeto(String[] info) {
         this.id = info[0];
         this.info = info;
         this.existe = true;
-    }
-
-    public Objeto() {
-        this.existe = false;
     }
 
     public String getId() {
@@ -37,6 +33,8 @@ public abstract class Objeto implements Comparable<Objeto> {
 
     public void setInfo(String[] info) {
         this.info = info;
+        this.id = info[0];
+        this.existe = true;
     }
 
     public boolean isExiste() {
@@ -82,4 +80,10 @@ public abstract class Objeto implements Comparable<Objeto> {
         return Arrays.deepToString(info);
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
+    
 }

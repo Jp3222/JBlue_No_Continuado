@@ -35,13 +35,13 @@ public class JFLogin extends ClassVentana implements Funciones {
 
     @Override
     public final void call() {
-        Info();
+        info();
         init();
         addListeners();
     }
 
     @Override
-    public void Info() {
+    public void info() {
         this.setTitle(ProgramaInfo.getSECCIONES(0) + INFO);
     }
 

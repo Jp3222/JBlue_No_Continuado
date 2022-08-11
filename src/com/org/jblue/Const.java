@@ -22,7 +22,7 @@ public class Const {
     /**
      * Retorna el mes indicado por el parametro i
      *
-     * @param i mes del año empezando por 0
+     * @param i mes del año empezando por 1
      * @return Mes seleccionado
      */
     public static String getMes(int i) {
@@ -32,17 +32,31 @@ public class Const {
     public static final String[] BD_PERSONAL = {
         "id", "nombre", "apellidos", "cargo", "usuario", "contra"
     };
-    public static final String[] BD_USUARIOS = {
-        "id", "nombre", "ap", "am", "calle", "toma", "fecha_registro", "estado"
+    public static final String[] BD_TITULARES = {
+        "id", "nombre", "ap", "am", "calle", "toma", "consumidores", "registro", "estado"
     };
+    public static final String[] BD_CONSUMIDORES = {
+        "id", "nombre", "ap", "am", "titular", "registro", "estado"
+    };
+
+    public static final String[] BD_PAGOS_TITULARES = {
+        "id", "titular", "mes_pagado", "personal", "dia", "mes", "anio"
+    };
+
+    public static final String[] BD_PAGOS_CONSUMIDORES = {
+        "id", "consumidor", "mes_pagado", "personal", "dia", "mes", "anio"
+    };
+
     public static final String[] BD_TOMAS = {
         "id", "tipo", "precio"
     };
+    
     public static final String[] BD_CALLES = {
         "id", "nombre", "numero"
     };
 
     private Const() {
-
+    
     }
+
 }

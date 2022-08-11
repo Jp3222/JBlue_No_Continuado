@@ -15,15 +15,15 @@ import javax.swing.JButton;
  */
 public class DecoradorBotones implements MouseListener {
 
-    private JButton button;
+    private final JButton button;
 
-    private Color click_back;
-    private Color hover_back;
-    private Color normal_back;
+    private final Color click_back;
+    private final Color hover_back;
+    private final Color normal_back;
 
-    private Color click_font;
-    private Color hover_font;
-    private Color normal_font;
+    private final Color click_font;
+    private final Color hover_font;
+    private final Color normal_font;
 
     public DecoradorBotones(JButton button) {
         this.button = button;

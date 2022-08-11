@@ -21,4 +21,8 @@ public class ControladorVentanas extends WindowAdapter {
         sesion.FinDeSesiones();
     }
 
+    public void finSesion() {
+        sesion.FinDeSesiones();
+    }
+
 }
