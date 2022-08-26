@@ -44,22 +44,24 @@ public class OperacionesTomas extends Funciones implements Operaciones {
     @Override
     public OTomas get(String where) {
         ArrayList<Objeto> get = super.GET(where);
-        if (get.isEmpty()) {
+        if (get == null || get.isEmpty()) {
             return null;
         }
-        return (OTomas) get.get(0);
+        OTomas o = (OTomas) get.get(0);
+        return o;
     }
 
     @Override
     public ArrayList<OTomas> getLista(String where) {
         ArrayList<Objeto> get = super.GET(where);
-        if (get.isEmpty()) {
+        if (get == null || get.isEmpty()) {
             return null;
         }
         ArrayList<OTomas> lista = new ArrayList<>(get.size());
         for (Objeto objeto : get) {
             lista.add((OTomas) objeto);
         }
+        get.clear();
         return lista;
     }
 

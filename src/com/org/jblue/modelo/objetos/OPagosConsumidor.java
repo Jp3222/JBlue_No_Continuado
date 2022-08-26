@@ -22,6 +22,10 @@ public class OPagosConsumidor extends Objeto {
         this.anio = info[6];
     }
 
+    public OPagosConsumidor() {
+        super();
+    }
+
     public String getConsumidor() {
         return consumidor;
     }

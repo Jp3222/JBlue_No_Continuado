@@ -6,7 +6,7 @@ package com.org.jblue.Sistema.funciones;
 
 import com.jsql.conexion.Conexion;
 import com.org.jblue.Const;
-import com.org.jblue.Sistema.Cache;
+import com.org.jblue.Sistema.cache.cacheBD.Cache;
 import com.org.jblue.modelo.objetos.OTitulares;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,7 +42,7 @@ public final class FuncionesBD {
         String mes1 = Const.getMes(mes - 1);
         ResultSet select = cn.select("pagos_hechos", "*", "mes_p = '" + mes1 + "' and anio = '" + anio + "' and usuario = '" + id + "'");
         if (!select.next()) {
-            for (OTitulares usuario : cache.getUsuarios()) {
+            for (OTitulares usuario : cache.getTitulares()) {
                 if (usuario.getId().equals(id)) {
                     System.out.println(usuario.getNombre() + " " + usuario.getAp() + " " + usuario.getAm());
                 }

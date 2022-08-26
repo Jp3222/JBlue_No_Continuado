@@ -1,5 +1,7 @@
 package com.org.jblue.modelo.objetos;
 
+import com.org.jblue.Sistema.ProgramaInfo;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -7,8 +9,10 @@ import java.util.Objects;
  *
  * @author jp
  */
-public abstract class Objeto implements Comparable<Objeto>, Cloneable {
-
+public abstract class Objeto implements Comparable<Objeto>, Cloneable, Serializable {
+    
+    public final static long serialVersionUID = ProgramaInfo.VERSION_UID;
+    
     private String id;
     private String[] info;
     private boolean existe;
@@ -17,6 +21,10 @@ public abstract class Objeto implements Comparable<Objeto>, Cloneable {
         this.id = info[0];
         this.info = info;
         this.existe = true;
+    }
+
+    public Objeto() {
+        this.existe = false;
     }
 
     public String getId() {
@@ -84,6 +92,5 @@ public abstract class Objeto implements Comparable<Objeto>, Cloneable {
     public Object clone() throws CloneNotSupportedException {
         return super.clone(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-    
-    
+
 }

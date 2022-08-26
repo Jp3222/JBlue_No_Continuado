@@ -1,8 +1,8 @@
 package main;
 
 import com.org.jblue.Sistema.Sistema;
-import com.org.jblue.modelo.objetos.OTomas;
-import java.util.ArrayList;
+import com.org.jblue.Sistema.cache.Cache;
+import com.org.jblue.Sistema.cache.GetCache;
 
 /**
  * Clase encargada del inicio del programa
@@ -17,10 +17,10 @@ public class J_Blue {
     public static void main(String[] args) {
         Sistema sistema = Sistema.getInstancia();
         if (sistema.run()) {
-            System.out.println("¡¡¡JBlue Ok!!!");
+            System.out.println("¡¡¡JBlue OK!!!");
         } else {
-            System.out.println("JBlue Error");
+            System.out.println("¡¡¡JBlue Error!!!");
         }
-
     }
+
 }

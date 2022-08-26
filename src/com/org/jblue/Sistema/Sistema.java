@@ -6,6 +6,7 @@ package com.org.jblue.Sistema;
 
 import com.jsql.conexion.Conexion;
 import com.org.JFiles.Archivos.AText;
+import com.org.jblue.Sistema.cache.cacheBD.Cache;
 import com.org.jblue.vistas.ventanas.JFConfgBD;
 import com.org.jblue.vistas.ventanas.JFLogin;
 import javax.swing.JOptionPane;
@@ -26,10 +27,8 @@ public class Sistema {
     private final ConstructorDeArchivos contructor;
     private Conexion cn;
     private Cache memoriaCache;
-    private boolean init;
 
     public Sistema() {
-        this.init = false;
         this.contructor = ConstructorDeArchivos.getInstancia();
         init();
     }
@@ -51,7 +50,6 @@ public class Sistema {
         } else {
             System.out.println("conexion exitosa");
         }
-        init = true;
     }
 
     public void construir() {
@@ -61,18 +59,13 @@ public class Sistema {
 
     public boolean run() {
         try {
-            if (init) {
-                JFLogin login = new JFLogin();
-                Runnable runnable = () -> login.setVisible(true);
-                SwingUtilities.invokeLater(runnable);
-                return true;
-            }
+            JFLogin login = new JFLogin();
+            Runnable runnable = () -> login.setVisible(true);
+            SwingUtilities.invokeLater(runnable);
+            return true;
         } catch (Exception e) {
             System.out.println(e.getCause().getMessage());
             return false;
-        } finally {
-
         }
-        return false;
     }
 }

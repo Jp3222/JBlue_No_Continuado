@@ -7,8 +7,6 @@ package com.org.jblue.Sistema;
 import com.org.JFiles.Systema.So;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -81,7 +79,7 @@ public class ConstructorDeArchivos {
                 try {
                     file.createNewFile();
                 } catch (IOException ex) {
-                    Logger.getLogger(ConstructorDeArchivos.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex.getMessage());
                 }
             }
         }

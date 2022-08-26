@@ -12,8 +12,6 @@ import com.org.jblue.vistas.ventanas.JFLogin;
 import com.org.jblue.vistas.ventanas.JFMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -67,14 +65,13 @@ public class CLogin extends Controlador {
                 final String valor = encriptador.encriptar(usuario, contra);
                 final String clave = encriptador.encriptar(contra, usuario);
                 OPersonal get = operaciones.get("usuario = '" + valor + "' and contra = '" + clave + "'");
-                if (get != null) {
-                    System.out.println(get.getNombre() + " " + get.getApellidos());
+                if (get != null && get.isExiste()) {
                     login.dispose();
                     login.reinicio();
                     sleep();
                     menu.setVisible(true);
                     sesiones.setUsuario(get);
-                    sesiones.InicioDeSesiones();
+                    sesiones.registroInicioDeSesiones();
                 } else {
                     JOptionPane.showMessageDialog(null, "El usuario y/o la contraseña son incorrectos", "Error de sesion", JOptionPane.WARNING_MESSAGE);
                 }
@@ -85,7 +82,7 @@ public class CLogin extends Controlador {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(CLogin.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex.getMessage());
             }
         }
     }

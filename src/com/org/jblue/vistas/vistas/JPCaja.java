@@ -4,11 +4,11 @@
  */
 package com.org.jblue.vistas.vistas;
 
-import com.org.jblue.Sistema.Cache;
 import com.org.jblue.Sistema.ProgramaInfo;
+import com.org.jblue.Sistema.cache.cacheBD.Cache;
 import com.org.jblue.controlador.CCaja;
-import com.org.jblue.modelo.objetos.OTomas;
 import com.org.jblue.modelo.objetos.OTitulares;
+import com.org.jblue.modelo.objetos.OTomas;
 import com.org.jblue.vistas.class_aux.ClassPanel;
 import com.org.jblue.vistas.class_aux.Funciones;
 import com.org.jblue.vistas.ventanas.JFMenu;
@@ -43,7 +43,7 @@ public class JPCaja extends ClassPanel implements Funciones {
     public JPCaja(JFMenu menu) {
         this.menu = menu;
         this.cache = Cache.getInstancia();
-        this.listaSugerencias = cache.getUsuarios();
+        this.listaSugerencias = cache.getTitulares();
         controlador = new CCaja(this);
         initComponents();
         call();
@@ -116,7 +116,7 @@ public class JPCaja extends ClassPanel implements Funciones {
 
         jButton5.setBackground(new java.awt.Color(153, 153, 153));
         jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setIcon(new javax.swing.ImageIcon("/home/jp/Documentos/NetBeansProyects/J_Blue/src/com/org/jblue/Icons/crud/nota-adhesiva x32.png")); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/org/jblue/Icons/crud/nota-adhesiva x32.png"))); // NOI18N
         jButton5.setToolTipText("Base de datos");
         jButton5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton5.setFocusable(false);
@@ -475,7 +475,7 @@ public class JPCaja extends ClassPanel implements Funciones {
     }
 
     public OTitulares getUsuario(String id) {
-        for (OTitulares o : cache.getUsuarios()) {
+        for (OTitulares o : cache.getTitulares()) {
             if (o.getId().equals(id)) {
                 return o;
             }

@@ -33,7 +33,7 @@ public class Const {
         "id", "nombre", "apellidos", "cargo", "usuario", "contra"
     };
     public static final String[] BD_TITULARES = {
-        "id", "nombre", "ap", "am", "calle", "toma", "consumidores", "registro", "estado"
+        "id", "nombre", "ap", "am", "calle", "toma", "registro", "estado"
     };
     public static final String[] BD_CONSUMIDORES = {
         "id", "nombre", "ap", "am", "titular", "registro", "estado"
@@ -50,13 +50,13 @@ public class Const {
     public static final String[] BD_TOMAS = {
         "id", "tipo", "precio"
     };
-    
+
     public static final String[] BD_CALLES = {
         "id", "nombre", "numero"
     };
 
     private Const() {
-    
+
     }
 
 }

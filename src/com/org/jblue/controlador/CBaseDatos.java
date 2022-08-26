@@ -4,15 +4,14 @@
  */
 package com.org.jblue.controlador;
 
-import com.org.jblue.Sistema.Cache;
+import com.org.jblue.Sistema.cache.cacheBD.Cache;
+import com.org.jblue.Sistema.cache.cacheGUI.cacheModelosTablas.CacheTablas;
 import com.org.jblue.modelo.objetos.OCalles;
-import com.org.jblue.modelo.objetos.OTitulares;
 import com.org.jblue.modelo.objetos.OTomas;
 import com.org.jblue.modelo.operaciones.OperacionesCalles;
 import com.org.jblue.modelo.operaciones.OperacionesTitulares;
 import com.org.jblue.modelo.operaciones.OperacionesTomas;
 import com.org.jblue.vistas.vistas.JPBaseDatos;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,6 +27,7 @@ public class CBaseDatos extends Controlador {
     private final OperacionesTitulares ousuarios;
     private DefaultTableModel modelUsuarios, modelCalles, modelTomas;
     private final Cache memoriaCache;
+    private final CacheTablas memoriaCacheTablas;
 
     public CBaseDatos(JPBaseDatos administracion) {
         this.administracion = administracion;
@@ -35,7 +35,7 @@ public class CBaseDatos extends Controlador {
         this.ocalles = new OperacionesCalles();
         this.ousuarios = new OperacionesTitulares();
         this.memoriaCache = Cache.getInstancia();
-
+        this.memoriaCacheTablas = CacheTablas.getInstancia(modelCalles, modelCalles, modelTomas, modelCalles);
     }
 
     // <editor-fold defaultstate="collapsed" desc="CRUD Tomas"> 
@@ -49,8 +49,8 @@ public class CBaseDatos extends Controlador {
         String[] o = administracion.getTomasInsert();
         if (otomas.insertar(o)) {
             memoriaCache.reCargarTomas();
-            recargarTablaTomas();
-            administracion.reiniciarListaCalles();
+            administracion.getModeloTablaTomas().recargar();
+            administracion.getModeloBoxTomas().recargar();
             JOptionPane.showMessageDialog(administracion, "Inserccion exitosa", "Base de datos", JOptionPane.INFORMATION_MESSAGE);
             administracion.vaciarCamposTomas();
         } else {
@@ -67,8 +67,8 @@ public class CBaseDatos extends Controlador {
         String[] o = administracion.getTomasUpdate();
         if (otomas.actualizar(otomas.getCampos(), o, "where id = " + o[0])) {
             memoriaCache.reCargarTomas();
-            recargarTablaTomas();
-            administracion.reiniciarListaTomas();
+            administracion.getModeloTablaTomas().recargar();
+            administracion.getModeloBoxTomas().recargar();
             JOptionPane.showMessageDialog(administracion, "Actualizacion exitosa", "Base de datos", JOptionPane.INFORMATION_MESSAGE);
             administracion.vaciarCamposTomas();
         } else {
@@ -84,8 +84,8 @@ public class CBaseDatos extends Controlador {
         }
         if (otomas.eliminar("id = " + administracion.getTomasDelete())) {
             memoriaCache.reCargarTomas();
-            recargarTablaTomas();
-            administracion.reiniciarListaTomas();
+            administracion.getModeloTablaTomas().recargar();
+            administracion.getModeloBoxTomas().recargar();
             JOptionPane.showMessageDialog(administracion, "Eliminacion exitosa", "Base de datos", JOptionPane.INFORMATION_MESSAGE);
             administracion.vaciarCamposTomas();
         } else {
@@ -106,8 +106,8 @@ public class CBaseDatos extends Controlador {
         String[] valores = administracion.getCalleInsert();
         if (ocalles.insertar(valores)) {
             memoriaCache.reCargarCalles();
-            recargarTablaCalles();
-            administracion.reiniciarListaTomas();
+            administracion.getModeloTablaCalles().recargar();
+            administracion.getModeloBoxCalles().recargar();
             JOptionPane.showMessageDialog(administracion, "Inserccion exitosa", "Base de datos", JOptionPane.INFORMATION_MESSAGE);
             administracion.vaciarCamposCalles();
         } else {
@@ -124,8 +124,8 @@ public class CBaseDatos extends Controlador {
         String[] valores = administracion.getCalleInsert();
         if (ocalles.actualizar(ocalles.getCampos(), valores, "id = " + valores[0])) {
             memoriaCache.reCargarCalles();
-            recargarTablaCalles();
-            administracion.reiniciarListaTomas();
+            administracion.getModeloTablaCalles().recargar();
+            administracion.getModeloBoxCalles().recargar();
             JOptionPane.showMessageDialog(administracion, "Inserccion exitosa", "Base de datos", JOptionPane.INFORMATION_MESSAGE);
             administracion.vaciarCamposCalles();
         } else {
@@ -141,8 +141,8 @@ public class CBaseDatos extends Controlador {
         }
         if (ocalles.eliminar("id = " + administracion.getCallesDelete())) {
             memoriaCache.reCargarCalles();
-            recargarTablaCalles();
-            administracion.reiniciarListaTomas();
+            administracion.getModeloTablaCalles().recargar();
+            administracion.getModeloBoxCalles().recargar();
             JOptionPane.showMessageDialog(administracion, "Inserccion exitosa", "Base de datos", JOptionPane.INFORMATION_MESSAGE);
             administracion.vaciarCamposCalles();
         } else {
@@ -161,8 +161,8 @@ public class CBaseDatos extends Controlador {
         }
         String[] valores = administracion.getUsuariosInsert();
         if (ousuarios.insertar(valores)) {
-            memoriaCache.reCargarUsuarios();
-            recargarTablaUsuarios();
+            memoriaCache.reCargarTitulares();
+
             JOptionPane.showMessageDialog(administracion, "Inserccion exitosa", "Base de datos", JOptionPane.INFORMATION_MESSAGE);
             administracion.vaciarCamposUsuario();
         } else {
@@ -178,8 +178,7 @@ public class CBaseDatos extends Controlador {
         }
         String[] valores = administracion.getUsuariosUpdate();
         if (ousuarios.actualizar(ousuarios.getCampos(), valores, "id = " + valores[0])) {
-            memoriaCache.reCargarUsuarios();
-            recargarTablaUsuarios();
+            memoriaCache.reCargarTitulares();
             JOptionPane.showMessageDialog(administracion, "Actualizacion exitosa", "Base de datos", JOptionPane.INFORMATION_MESSAGE);
             administracion.vaciarCamposUsuario();
         } else {
@@ -189,8 +188,7 @@ public class CBaseDatos extends Controlador {
 
     public void removeUsuario() {
         if (ousuarios.eliminar("id = " + administracion.getUsuarioDelete())) {
-            memoriaCache.reCargarUsuarios();
-            recargarTablaUsuarios();
+            memoriaCache.reCargarTitulares();
             JOptionPane.showMessageDialog(administracion, "Eliminacion exitosa", "Base de datos", JOptionPane.INFORMATION_MESSAGE);
             administracion.vaciarCamposUsuario();
         } else {
@@ -218,92 +216,6 @@ public class CBaseDatos extends Controlador {
             }
         }
         return "0";
-    }
-
-    //Tablas
-    public void setModelCalles(DefaultTableModel modelCalles) {
-        this.modelCalles = modelCalles;
-    }
-
-    public void llenarTablaCalles() {
-        ArrayList<OCalles> calles = memoriaCache.getCalles();
-        for (OCalles calle : calles) {
-            modelCalles.addRow(calle.getInfo());
-        }
-    }
-
-    public void vaciarTablaCalles() {
-        while (modelCalles.getRowCount() > 0) {
-            modelCalles.removeRow(0);
-        }
-    }
-
-    public void recargarTablaCalles() {
-        vaciarTablaCalles();
-        llenarTablaCalles();
-    }
-
-    public void setModelTomas(DefaultTableModel modelTomas) {
-        this.modelTomas = modelTomas;
-    }
-
-    public void llenarTablaTomas() {
-        ArrayList<OTomas> tomas = memoriaCache.getTomas();
-        for (OTomas toma : tomas) {
-            System.out.println("toma");
-            modelTomas.addRow(toma.getInfo());
-        }
-    }
-
-    public void vaciarTablaTomas() {
-        while (modelTomas.getRowCount() > 0) {
-            modelTomas.removeRow(0);
-        }
-    }
-
-    public void recargarTablaTomas() {
-        vaciarTablaTomas();
-        llenarTablaTomas();
-    }
-
-    public void setModelUsuarios(DefaultTableModel modelUsuarios) {
-        this.modelUsuarios = modelUsuarios;
-    }
-
-    public void llenarTablaUsuarios() {
-        ArrayList<OTitulares> usuarios = memoriaCache.getUsuarios();
-        for (OTitulares o : usuarios) {
-            modelUsuarios.addRow(o.getInfo());
-        }
-        ArrayList<OTomas> tomas = memoriaCache.getTomas();
-        for (int i = 0; i < modelUsuarios.getRowCount(); i++) {
-            String tipo = "" + modelUsuarios.getValueAt(i, 5);
-            for (OTomas toma : tomas) {
-                if (tipo.equalsIgnoreCase(toma.getId())) {
-                    modelUsuarios.setValueAt(toma.getTipo(), i, 5);
-                }
-            }
-        }
-        ArrayList<OCalles> calles = memoriaCache.getCalles();
-        for (int i = 0; i < modelUsuarios.getRowCount(); i++) {
-            String tipo = "" + modelUsuarios.getValueAt(i, 4);
-            for (OCalles calle : calles) {
-                if (tipo.equals(calle.getId())) {
-                    modelUsuarios.setValueAt(calle.getNombre() + " No. " + calle.getNumero(), i, 4);
-                }
-            }
-        }
-    }
-
-    public void vaciarTablaUsuarios() {
-        while (modelUsuarios.getRowCount() > 0) {
-            modelUsuarios.removeRow(0);
-        }
-    }
-
-    public void recargarTablaUsuarios() {
-        vaciarTablaUsuarios();
-        llenarTablaUsuarios();
     }
 
 }

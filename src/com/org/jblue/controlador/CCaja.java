@@ -6,7 +6,7 @@ package com.org.jblue.controlador;
 
 import com.jsql.conexion.Conexion;
 import com.org.jblue.Const;
-import com.org.jblue.Sistema.Cache;
+import com.org.jblue.Sistema.cache.cacheBD.Cache;
 import com.org.jblue.modelo.objetos.OPagosTitular;
 import com.org.jblue.modelo.objetos.OTitulares;
 import com.org.jblue.modelo.objetos.OTomas;
@@ -152,7 +152,7 @@ public class CCaja extends Controlador {
         }
 
         String[] getInfo(String id) {
-            ArrayList<OTitulares> usuarios = memoriaCache.getUsuarios();
+            ArrayList<OTitulares> usuarios = memoriaCache.getTitulares();
             for (OTitulares usuario : usuarios) {
                 if (usuario.getId().equals(id)) {
                     String nombre = usuario.getNombre() + " " + usuario.getAp() + " " + usuario.getAm();

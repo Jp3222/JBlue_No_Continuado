@@ -23,7 +23,7 @@ public class OperacionesPagosTitulares extends Funciones implements Operaciones 
 
     @Override
     public boolean insertar(String[] valores) {
-        return super.INSERTAR( valores);
+        return super.INSERTAR(valores);
     }
 
     @Override
@@ -44,22 +44,25 @@ public class OperacionesPagosTitulares extends Funciones implements Operaciones 
     @Override
     public OPagosTitular get(String where) {
         ArrayList<Objeto> get = super.GET(where);
-        if (get.isEmpty()) {
+        if (get == null || get.isEmpty()) {
             return null;
         }
-        return (OPagosTitular) get.get(0);
+        OPagosTitular o = (OPagosTitular) get.get(0);
+        get.clear();
+        return o;
     }
 
     @Override
     public ArrayList<OPagosTitular> getLista(String where) {
         ArrayList<Objeto> get = super.GET(where);
-        if (get != null && get.isEmpty()) {
+        if (get == null || get.isEmpty()) {
             return null;
         }
         ArrayList<OPagosTitular> lista = new ArrayList<>(get.size());
         for (Objeto objeto : get) {
             lista.add((OPagosTitular) objeto);
         }
+        get.clear();
         return lista;
     }
 

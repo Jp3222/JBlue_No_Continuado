@@ -19,6 +19,10 @@ public class OTomas extends Objeto {
         this.costo = Double.parseDouble(info[2]);
     }
 
+    public OTomas() {
+        super();
+    }
+
     public String getTipo() {
         return tipo;
     }

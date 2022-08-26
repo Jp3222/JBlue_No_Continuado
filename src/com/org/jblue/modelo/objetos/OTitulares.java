@@ -31,6 +31,10 @@ public class OTitulares extends Objeto {
         this.estado = info[8];
     }
 
+    public OTitulares() {
+        super();
+    }
+
     public String getNombre() {
         return nombre;
     }

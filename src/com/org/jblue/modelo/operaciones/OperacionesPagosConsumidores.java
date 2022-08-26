@@ -45,22 +45,25 @@ public class OperacionesPagosConsumidores extends Funciones implements Operacion
     @Override
     public OPagosConsumidor get(String where) {
         ArrayList<Objeto> get = GET(where);
-        if (get.isEmpty()) {
+        if (get == null || get.isEmpty()) {
             return null;
         }
-        return (OPagosConsumidor) get.get(0);
+        OPagosConsumidor o = (OPagosConsumidor) get.get(0);
+        get.clear();
+        return o;
     }
 
     @Override
     public ArrayList<OPagosConsumidor> getLista(String where) {
         ArrayList<Objeto> get = super.GET(where);
-        if (get.isEmpty()) {
+        if (get == null || get.isEmpty()) {
             return null;
         }
         ArrayList<OPagosConsumidor> lista = new ArrayList<>(get.size());
         for (Objeto objeto : get) {
             lista.add((OPagosConsumidor) objeto);
         }
+        get.clear();
         return lista;
     }
 }

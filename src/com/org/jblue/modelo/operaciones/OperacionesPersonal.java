@@ -58,22 +58,25 @@ public class OperacionesPersonal extends Funciones implements Operaciones {
     @Override
     public OPersonal get(String where) {
         ArrayList<Objeto> get = super.GET(where);
-        if (get==null||get.isEmpty()) {
-            throw new NullPointerException("Error en la clase de operaciones " + tabla);
+        if (get == null || get.isEmpty()) {
+            return null;
         }
-        return (OPersonal) get.get(0);
+        OPersonal o = (OPersonal) get.get(0);
+        get.clear();
+        return o;
     }
 
     @Override
     public ArrayList<OPersonal> getLista(String where) {
         ArrayList<Objeto> get = super.GET(where);
-        if (get.isEmpty()) {
+        if (get == null || get.isEmpty()) {
             return null;
         }
         ArrayList<OPersonal> lista = new ArrayList<>(get.size());
         for (Objeto objeto : get) {
             lista.add((OPersonal) objeto);
         }
+        get.clear();
         return lista;
     }
 

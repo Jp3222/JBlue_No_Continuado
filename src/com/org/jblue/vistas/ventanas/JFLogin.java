@@ -1,9 +1,9 @@
 package com.org.jblue.vistas.ventanas;
 
-import com.org.jblue.vistas.class_aux.ClassVentana;
-import com.org.jblue.vistas.class_aux.Funciones;
 import com.org.jblue.Sistema.ProgramaInfo;
 import com.org.jblue.controlador.CLogin;
+import com.org.jblue.vistas.class_aux.ClassVentana;
+import com.org.jblue.vistas.class_aux.Funciones;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -245,7 +245,6 @@ public class JFLogin extends ClassVentana implements Funciones {
         this.jTextField1.setText("ejemplo:usuario13");
         this.jTextField1.setForeground(letrasGrises);
         this.jPasswordField1.setText("contraseña");
-
         this.dispose();
     }
 

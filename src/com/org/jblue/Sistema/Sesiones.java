@@ -19,9 +19,18 @@ import java.time.format.DateTimeFormatter;
  */
 public class Sesiones {
 
+    /**
+     * *
+     * Instancia unica de esta clase
+     */
     private static final Sesiones instancia = new Sesiones();
 
-    public static Sesiones getInstancia() {
+    /**
+     * Metodo que retorna una instancia unica de la clase "Sesiones"
+     *
+     * @return un objeto de tipo "sesiones"
+     */
+    public synchronized static Sesiones getInstancia() {
         return instancia;
     }
 
@@ -37,10 +46,22 @@ public class Sesiones {
         return usuario;
     }
 
+    /**
+     * Asiga al usuario que esta en sesion
+     *
+     * @param usuario - usuario que ha iniciado sesion en el programa
+     */
     public void setUsuario(OPersonal usuario) {
         this.usuario = usuario;
     }
 
+    /**
+     * Este metodo evalua si el dia y la hora son los corrector para abrir el
+     * programa
+     *
+     * @return true si es el dia 5 o 6 de la semana y si la hora esta entre las
+     * 7 y 9
+     */
     public boolean isAbierto() {
         LocalDate fecha = LocalDate.now();
         LocalTime hora = LocalTime.now();
@@ -49,7 +70,15 @@ public class Sesiones {
         return true;
     }
 
-    public void InicioDeSesiones() {
+    /**
+     * Metodo que registra un inicio de sesion en la base de datos
+     * <br>datos a guardar:
+     * <br> movimiento( codigo: 101)
+     * <br> personal(id)
+     * <br> fecha(dd-MM-yyyy)
+     * <br> hora(ss-mm-HH)
+     */
+    public void registroInicioDeSesiones() {
         LocalTime hora = LocalTime.now();
         LocalDate fecha = LocalDate.now();
         cn.insert(
@@ -67,7 +96,15 @@ public class Sesiones {
         );
     }
 
-    public void FinDeSesiones() {
+    /**
+     * Metodo que registra un Fin de sesion en la base de datos
+     * <br>datos a guardar:
+     * <br> movimiento( codigo: 102)
+     * <br> personal(id)
+     * <br> fecha(dd-MM-yyyy)
+     * <br> hora(ss-mm-HH)
+     */
+    public void registroFinDeSesiones() {
         LocalTime hora = LocalTime.now();
         LocalDate fecha = LocalDate.now();
         cn.insert(

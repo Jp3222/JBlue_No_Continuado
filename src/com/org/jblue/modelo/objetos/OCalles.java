@@ -8,8 +8,8 @@ package com.org.jblue.modelo.objetos;
  *
  * @author jp
  */
-public class OCalles extends Objeto {
-
+public class OCalles extends Objeto { 
+    
     private String nombre;
     private String numero;
 
@@ -17,6 +17,10 @@ public class OCalles extends Objeto {
         super(info);
         this.nombre = info[1];
         this.numero = info[2];
+    }
+
+    public OCalles() {
+        super();
     }
 
     public String getNombre() {
@@ -46,7 +50,5 @@ public class OCalles extends Objeto {
     public Object clone() throws CloneNotSupportedException {
         return super.clone(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-
-    
 
 }

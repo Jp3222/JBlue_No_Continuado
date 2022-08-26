@@ -27,6 +27,10 @@ public class OConsumidores extends Objeto {
         this.estado = info[6];
     }
 
+    public OConsumidores() {
+        super();
+    }
+
     public String getNombre() {
         return nombre;
     }

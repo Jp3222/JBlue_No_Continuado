@@ -22,6 +22,10 @@ public class OPagosTitular extends Objeto {
         this.anio = info[6];
     }
 
+    public OPagosTitular() {
+        super();
+    }
+
     public String getTitular() {
         return titular;
     }

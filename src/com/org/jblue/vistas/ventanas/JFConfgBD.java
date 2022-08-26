@@ -16,13 +16,13 @@ import javax.swing.JOptionPane;
  */
 public class JFConfgBD extends javax.swing.JFrame {
 
-    ConstructorDeArchivos instancia;
+    private final ConstructorDeArchivos archivos;
 
     /**
      * Creates new form JFConfgBD
      */
     public JFConfgBD() {
-        instancia = ConstructorDeArchivos.getInstancia();
+        archivos = ConstructorDeArchivos.getInstancia();
         initComponents();
     }
 
@@ -199,7 +199,7 @@ public class JFConfgBD extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        instancia.run();
+        archivos.run();
         String user, pass, url;
         url = jtfURL.getText();
         user = jtfUsuario.getText();
@@ -207,7 +207,7 @@ public class JFConfgBD extends javax.swing.JFrame {
         //
         AText o = new AText();
         String txt = user + "," + pass + "," + url;
-        File file = instancia.getFiles(1);
+        File file = archivos.getFiles(1);
         o.Escribir_Archivo(file, txt);
         JOptionPane.showMessageDialog(null, "Datos Guardados");
         dispose();

@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
  */
 public class ProgramaInfo {
 
+    public static final long VERSION_UID = 1L;
     public static final Icon ICON = new ImageIcon(ProgramaInfo.class.getResource("/com/org/jblue/Icons"));
     public static final String NOMBRE = "jblue";
     public static final String VERSION = "0.0";

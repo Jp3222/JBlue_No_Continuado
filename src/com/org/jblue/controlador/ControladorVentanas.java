@@ -18,11 +18,11 @@ public class ControladorVentanas extends WindowAdapter {
 
     @Override
     public void windowClosing(WindowEvent e) {
-        sesion.FinDeSesiones();
+        sesion.registroFinDeSesiones();
     }
 
     public void finSesion() {
-        sesion.FinDeSesiones();
+        sesion.registroFinDeSesiones();
     }
 
 }

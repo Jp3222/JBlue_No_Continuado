@@ -25,6 +25,10 @@ public class OPersonal extends Objeto {
         this.contraseña = info[5];
     }
 
+    public OPersonal() {
+        super();
+    }
+
     public String getNombre() {
         return nombre;
     }

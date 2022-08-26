@@ -18,12 +18,12 @@ import java.util.ArrayList;
 public class OperacionesTitulares extends Funciones implements Operaciones {
 
     public OperacionesTitulares() {
-        super("usuario", Const.BD_TITULARES);
+        super("titulares", Const.BD_TITULARES);
     }
 
     @Override
     public boolean insertar(String[] valores) {
-        return super.INSERTAR( valores);
+        return super.INSERTAR(valores);
     }
 
     @Override
@@ -44,22 +44,25 @@ public class OperacionesTitulares extends Funciones implements Operaciones {
     @Override
     public OTitulares get(String where) {
         ArrayList<Objeto> get = super.GET(where);
-        if (get.isEmpty()) {
+        if (get == null || get.isEmpty()) {
             return null;
         }
-        return (OTitulares) get.get(0);
+        OTitulares o = (OTitulares) get.get(0);
+        get.clear();
+        return o;
     }
 
     @Override
     public ArrayList<OTitulares> getLista(String where) {
-        ArrayList<Objeto> get = super.GET( where);
-        if (get.isEmpty()) {
+        ArrayList<Objeto> get = super.GET(where);
+        if (get == null || get.isEmpty()) {
             return null;
         }
         ArrayList<OTitulares> lista = new ArrayList<>(get.size());
         for (Objeto objeto : get) {
             lista.add((OTitulares) objeto);
         }
+        get.clear();
         return lista;
     }
 
